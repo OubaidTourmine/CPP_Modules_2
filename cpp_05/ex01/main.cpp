@@ -36,3 +36,23 @@ int main()
         std::cout << "After signing : " << form1.is_Signed() << std::endl;
         std::cout << form1 << std::endl  << std::endl;
     }
+    catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
+    
+    try {
+        Bureaucrat Bureaucrat2("Tourmine", 11);
+        Form form4("ContractForm1", 5, 10);
+        std::cout << "\nBefore signing : " << form4.is_Signed() << std::endl;
+        Bureaucrat2.signForm(form4);
+        std::cout << "After signing : " << form4.is_Signed() << std::endl;
+        std::cout << form4 << std::endl  << std::endl;
+    }
+    catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
+
+
+    
+    return 0;
+}
