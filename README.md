@@ -16,3 +16,7 @@ Run `make clean` inside an exercise directory to remove object files. Use `make 
 ## RPN exercise
 
 Build the reverse Polish notation exercise with `make -C cpp_09/ex01`. Its executable is `cpp_09/ex01/RPN`.
+
+## Module 05
+
+From the repository root, run `make -C cpp_05/ex00` to build the first Bureaucrat exercise without changing directories.
