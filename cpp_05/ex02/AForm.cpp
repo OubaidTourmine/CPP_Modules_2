@@ -52,3 +52,57 @@ int AForm::getGradeToExecute() const
 
 const char *AForm::GradeTooHighException::what() const throw()
 {
+	return ("grade too high");
+}
+
+const char *AForm::GradeTooLowException::what() const throw()
+{
+	return ("grade too low");
+}
+
+
+void AForm::beSigned(Bureaucrat &bureaucrat)
+{
+    if (bureaucrat.getGrade() <= getGradeToSign())
+        is_signed = true;
+    else
+        throw GradeTooLowException();
+}
+
+bool AForm::is_Signed() const
+{
+    return is_signed;
+}
+
+std::ostream &operator<<(std::ostream &out, const AForm &Aform)
+{
+	out << "Form \"" << Aform.getName() << "\" | Signed: ";
+	if (Aform.is_Signed())
+		out << "yes";
+	else
+		out << "no";
+	out << " | Grade to sign: " << Aform.getGradeToSign() << " | Grade to execute: " << Aform.getGradeToExecute();
+	return (out);
+}
+
+const char *AForm::notSignedException::what() const throw()
+{
+	return ("Form can not be executed, because it is not signed!");
+}
+
+void AForm::execute(const Bureaucrat &executor) const
+{
+	if (is_Signed() == false)
+		throw notSignedException();
+	if (getGradeToExecute() < executor.getGrade())
+		throw GradeTooLowException();
+	try
+	{
+		executeAction();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+		
+}
