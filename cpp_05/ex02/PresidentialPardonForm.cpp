@@ -22,3 +22,15 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &oth
 }
 
 PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &other)
+{
+    if(this != &other)
+    {
+        target = other.target;
+    }
+    return (*this);
+}  
+
+void PresidentialPardonForm::executeAction()const
+{
+    std::cout << target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
+}
