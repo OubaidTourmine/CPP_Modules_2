@@ -10,3 +10,15 @@ PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : AFor
 {
 
 }
+
+PresidentialPardonForm::~PresidentialPardonForm()
+{
+
+}
+
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) : AForm(other), target(other.target)
+{
+    target = other.target;
+}
+
+PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &other)
