@@ -24,3 +24,29 @@ int main()
     employee.signForm(pardon);
 
 
+	std::cout << "\n--- Attempt signing with high-grade Director ---\n";
+    director.signForm(shrub);
+    director.signForm(robo);
+    director.signForm(pardon);
+
+    std::cout << "\n--- Try execute with intern ---\n";
+    intern.executeForm(shrub);
+    intern.executeForm(robo);
+	intern.executeForm(pardon);
+    std::cout << "\n--- Try execute with employee ---\n";
+    employee.executeForm(shrub);
+    employee.executeForm(robo);
+	employee.executeForm(pardon);
+    std::cout << "\n--- Try execute with Director ---\n";
+    director.executeForm(shrub);
+    director.executeForm(robo);
+    director.executeForm(pardon);
+
+    std::cout << "\n--- Direct calls to execute  ---\n";
+    try 
+    {
+		shrub.execute(director); std::cout << "director executed shrub\n"; 
+		shrub.execute(employee); std::cout << "employee executed shrub\n"; 
+		shrub.execute(intern); std::cout << "intern executed shrub\n";
+    } 
+    catch (const std::exception &e) 
