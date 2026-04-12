@@ -50,3 +50,30 @@ int main()
 		shrub.execute(intern); std::cout << "intern executed shrub\n";
     } 
     catch (const std::exception &e) 
+    {
+		std::cerr << e.what() << "\n\n"; 
+    }
+    try 
+    {
+		robo.execute(director);  std::cout << "director executed robo\n";  
+		robo.execute(employee);  std::cout << "employee executed robo\n";  
+		robo.execute(intern);  std::cout << "intern executed robo\n";  
+    } 
+    catch (const std::exception &e) 
+    {
+		std::cerr << e.what() << "\n\n"; 
+    }
+
+    try 
+    {
+		pardon.execute(director);std::cout << "director executed pardon\n";
+		pardon.execute(employee);std::cout << "employee executed pardon\n";
+		pardon.execute(intern);std::cout << "intern executed pardon\n";
+    }
+	catch (const std::exception &e) 
+    { 
+		std::cerr << e.what() << "\n";
+    }
+
+    return 0;
+}
