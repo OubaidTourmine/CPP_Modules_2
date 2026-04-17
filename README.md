@@ -20,3 +20,7 @@ Build the reverse Polish notation exercise with `make -C cpp_09/ex01`. Its execu
 ## Module 05
 
 From the repository root, run `make -C cpp_05/ex00` to build the first Bureaucrat exercise without changing directories.
+
+## Repository layout
+
+The `cpp_05` through `cpp_09` directories group exercises by module. Exercise directories use names such as `ex00`, `ex01`, and `ex02`; build each exercise separately with its own Makefile.
