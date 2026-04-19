@@ -24,3 +24,29 @@ class AForm
         virtual ~AForm();
         const std::string &getName() const;
         int getGradeToSign() const;
+        int getGradeToExecute() const;
+        bool is_Signed() const;
+        void beSigned(Bureaucrat &bureaucrat);
+
+
+        class GradeTooHighException : public std::exception
+		{
+			public:
+				const char *what() const throw();
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				const char *what() const throw();
+		};
+        class notSignedException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
+};
+
+std::ostream &operator<<(std::ostream &os, const AForm &Aform);
+
+#endif
