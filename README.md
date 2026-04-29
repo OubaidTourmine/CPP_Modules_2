@@ -30,3 +30,7 @@ The `cpp_05` through `cpp_09` directories group exercises by module. Exercise di
 Build the scalar conversion exercise with `make -C cpp_06/ex00`. The generated executable is `cpp_06/ex00/ex00`.
 
 After building `cpp_05/ex00`, run its demonstration with `./cpp_05/ex00/ex00` from the repository root.
+
+## Intern exercise
+
+Run `make -C cpp_05/ex03` to build the Intern exercise. Its executable is `cpp_05/ex03/ex03`.
