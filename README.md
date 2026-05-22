@@ -34,3 +34,7 @@ After building `cpp_05/ex00`, run its demonstration with `./cpp_05/ex00/ex00` fr
 ## Intern exercise
 
 Run `make -C cpp_05/ex03` to build the Intern exercise. Its executable is `cpp_05/ex03/ex03`.
+
+## Serialization exercise
+
+Build with `make -C cpp_06/ex01`, then run `./cpp_06/ex01/ex01` from the repository root.
