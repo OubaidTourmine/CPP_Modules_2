@@ -35,3 +35,40 @@ void identify(Base* p)
 void identify(Base& p)
 {
     try
+    {
+        (void)dynamic_cast<A&>(p);
+        std::cout << "A" << std::endl;
+    }
+    catch(const std::exception& e) { }
+    
+    try
+    {
+        (void)dynamic_cast<B&>(p);
+        std::cout << "B" << std::endl;
+    }
+    catch(const std::exception& e) {}
+    
+    try
+    {
+        (void)dynamic_cast<C&>(p);
+        std::cout << "C" << std::endl;
+    }
+    catch(const std::exception& e) {}
+}
+
+int main ()
+{
+    srand(time(0));
+    Base *p = generate();
+    Base *t = generate();
+    
+    identify(p);
+    identify(t);
+    
+    identify(*p);
+    identify(*t);
+    
+    delete p;
+    delete t;
+    return 0;
+}
