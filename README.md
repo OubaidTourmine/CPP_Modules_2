@@ -38,3 +38,7 @@ Run `make -C cpp_05/ex03` to build the Intern exercise. Its executable is `cpp_0
 ## Serialization exercise
 
 Build with `make -C cpp_06/ex01`, then run `./cpp_06/ex01/ex01` from the repository root.
+
+## Type identification exercise
+
+Build with `make -C cpp_06/ex02`, then run `./cpp_06/ex02/ex02` from the repository root.
