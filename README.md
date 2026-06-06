@@ -24,3 +24,7 @@ From the repository root, run `make -C cpp_05/ex00` to build the first Bureaucra
 ## Repository layout
 
 The `cpp_05` through `cpp_09` directories group exercises by module. Exercise directories use names such as `ex00`, `ex01`, and `ex02`; build each exercise separately with its own Makefile.
+
+## Module 06
+
+Build the scalar conversion exercise with `make -C cpp_06/ex00`. The generated executable is `cpp_06/ex00/ex00`.
