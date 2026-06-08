@@ -48,3 +48,28 @@ int main()
 
 	const std::size_t wordCount = 3;
 	std::string words[wordCount] = {"hello", "world", "cpp"};
+	std::cout << "words before: ";
+	iter(words, wordCount, printConst<std::string>);
+	std::cout << std::endl;
+
+	iter(words, wordCount, upperCase);
+
+	std::cout << "words after upperCase: ";
+	iter(words, wordCount, printConst<std::string>);
+	std::cout << std::endl << std::endl;
+
+	const std::size_t floatCount = 3;
+	float values[floatCount] = {1.5f, -2.0f, 0.25f};
+	std::cout << "floats before: ";
+	iter(values, floatCount, printConst<float>);
+	std::cout << std::endl;
+
+	iter(values, floatCount, doubleValue);
+
+	std::cout << "floats after doubleValue: ";
+	iter(values, floatCount, printConst<float>);
+	std::cout << std::endl;
+
+	return 0;
+}
+
