@@ -90,3 +90,96 @@ bool BitcoinExchange::isValidValue(const std::string &value)
     return true;
 }
 
+void BitcoinExchange::userInput(std::ifstream &file)
+{
+    std::string line;
+    std::getline(file, line);
+    std::string date;
+    std::string value;
+    while (std::getline(file, line))
+    {
+        if (trim(line).empty())
+            continue;
+ 
+        size_t pos = line.find('|');
+        if (pos == std::string::npos)
+        {
+            std::cout << "Error: bad input => " << trim(line) << std::endl;
+            continue;
+        }
+ 
+        date = trim(line.substr(0, pos));
+        value = line.substr(pos + 1);
+ 
+        if (!isValidDate(date))
+        {
+            std::cout << "Error: bad input => " << date << std::endl;
+            continue;
+        }
+        if (!isValidValue(value))
+        {
+            std::cout << "Error: bad number input. "<< std::endl;
+            continue;
+        }
+ 
+        std::stringstream ss(value);
+        float amount;
+        ss >> amount;
+ 
+        try
+        {
+            float rate = getExchangeRate(date);
+            std::cout << date << " => " << amount << " = " << amount * rate << std::endl;
+        }
+        catch (const std::exception &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
+}
+
+void BitcoinExchange::parse_date(std::ifstream &file)
+{
+    std::string line;
+    std::getline(file, line);
+    while (std::getline(file, line))
+    {
+        if (trim(line).empty())
+            continue;
+        std::stringstream ss(line);
+        std::getline(ss, date, ',');
+        std::getline(ss, exchange_rate, ',');
+        std::istringstream iss(exchange_rate);
+        if (iss >> value)
+            data_base[date] = value;
+    }
+}
+
+
+int main (int ac, char **av)
+{
+    if(ac != 2)
+        return (std::cout << "Error: enter valid arguments." << std::endl, 1);
+    std::ifstream inputFile(av[1]);
+    if (!inputFile.is_open())
+    {
+        std::cerr << "Error: could not open file." << std::endl;
+        return 1;
+    }
+    if(!(std::string(av[1]).find(".txt") == std::string::npos || std::string(av[1]).find(".csv") == std::string::npos))
+    {
+        std::cout << "Error: file must be a .txt or .csv file." << std::endl;
+        return 1;
+    }
+    std::ifstream file("data.csv");
+    if (!file.is_open())
+    {
+        std::cerr << "Error: could not open .csv file." << std::endl;
+        return 1;
+    }
+
+    BitcoinExchange btc;
+    btc.parse_date(file);
+    btc.userInput(inputFile);
+    return 0;
+}
