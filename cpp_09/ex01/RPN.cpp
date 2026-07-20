@@ -44,3 +44,27 @@ int RPN::ProcessInput(const std::string &input)
                 if (b == 0)
                 {
                     return((std::cerr << "Error: Can't devide by zero" << std::endl), 1);
+                }
+                result = a / b;
+            }
+
+            stack.push(result);
+        }
+        else if (token.length() == 1 && token[0] >= '0' && token[0] <= '9')
+        {
+            stack.push(token[0] - '0');
+        }
+        else
+        {
+            return((std::cerr << "Error" << std::endl), 1);
+        }
+    }
+
+    if (stack.size() != 1)
+    {
+        return((std::cerr << "Error: Invalid RPN" << std::endl), 1);
+    }
+
+    std::cout << stack.top() << std::endl;
+    return 0;
+}
