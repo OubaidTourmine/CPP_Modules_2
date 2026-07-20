@@ -21,3 +21,26 @@ int RPN::ProcessInput(const std::string &input)
     while (iss >> token)
     {
         if (token == "+" || token == "-" || token == "*" || token == "/")
+        {
+            if (stack.size() < 2)
+            {
+                return((std::cerr << "Error: Invalid operators" << std::endl), 1);
+            }
+
+            int b = stack.top();
+            stack.pop();
+            int a = stack.top();
+            stack.pop();
+            int result;
+
+            if (token == "+")
+                result = a + b;
+            else if (token == "-")
+                result = a - b;
+            else if (token == "*")
+                result = a * b;
+            else if (token == "/")
+            {
+                if (b == 0)
+                {
+                    return((std::cerr << "Error: Can't devide by zero" << std::endl), 1);
