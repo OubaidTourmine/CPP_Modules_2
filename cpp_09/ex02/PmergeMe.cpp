@@ -95,3 +95,101 @@ static Container mergeInsertSort(Container &arr)
     }
 
     Container mainChain;
+    Container pend;
+
+    for (std::size_t i = 0; i < pairs.size(); i++)
+    {
+        mainChain.push_back(pairs[i].first);
+        pend.push_back(pairs[i].second);
+    }
+
+    if (!pend.empty())
+        mainChain.insert(mainChain.begin(), pend[0]);
+
+    Container insertionOrder;
+    std::size_t jacobIndex = 3;
+    std::size_t lastJacob = 1;
+
+    while (lastJacob < pend.size())
+    {
+        std::size_t currentJacob = jacobsthal(jacobIndex);
+        std::size_t start = std::min(static_cast<std::size_t>(currentJacob), pend.size());
+        for (std::size_t i = start; i > lastJacob; --i)
+        {
+            insertionOrder.push_back(i - 1);
+        }
+
+        lastJacob = start;
+        jacobIndex++;
+    }
+
+    for (std::size_t i = 0; i < insertionOrder.size(); i++)
+    {
+        std::size_t index = insertionOrder[i];
+        unsigned int element = pend[index];
+        unsigned int partner = pairs[index].first;
+
+        typename Container::iterator partnerIt = std::lower_bound(mainChain.begin(), mainChain.end(), partner);
+        typename Container::iterator insertIt = std::lower_bound(mainChain.begin(), partnerIt, element);
+
+        mainChain.insert(insertIt, element);
+    }
+
+    if (hasStraggler)
+    {
+        typename Container::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), straggler);
+        mainChain.insert(it, straggler);
+    }
+
+    return mainChain;
+}
+
+template <typename Container>
+static void print_limited(const Container &values, const std::string &label)
+{
+    std::cout << label << " ";
+
+    std::size_t print_count = values.size();
+    if (print_count > 5)
+        print_count = 5;
+
+    for (std::size_t i = 0; i < print_count; ++i)
+        std::cout << values[i] << " ";
+
+    if (values.size() > 5)
+        std::cout << "[...]";
+
+    std::cout << std::endl;
+}
+
+template <typename Container>
+static double get_sort_time(const Container &values)
+{
+    struct timeval start;
+    struct timeval end;
+    Container copy = values;
+
+    gettimeofday(&start, NULL);
+    mergeInsertSort(copy);
+    gettimeofday(&end, NULL);
+
+    double elapsed = (end.tv_sec - start.tv_sec) * 1000000.0;
+    elapsed += (end.tv_usec - start.tv_usec);
+    return elapsed;
+}
+
+void run()
+{
+    std::vector<unsigned int> vec_sorted = mergeInsertSort(g_vec);
+    std::deque<unsigned int> deq_sorted = mergeInsertSort(g_deq);
+
+    print_limited(g_vec, "Before:");
+    print_limited(vec_sorted, "After:");
+
+    std::cout << std::fixed << std::setprecision(5);
+    std::cout << "Time to process a range of " << g_vec.size() << " elements with std::vector : "
+              << get_sort_time(g_vec) << " us" << std::endl;
+    std::cout << "Time to process a range of " << g_deq.size() << " elements with std::deque : "
+              << get_sort_time(g_deq) << " us" << std::endl;
+}
+
